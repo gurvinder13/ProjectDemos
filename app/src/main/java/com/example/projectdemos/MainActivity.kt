@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectdemos.data.api.ApiHelper
 import com.example.projectdemos.data.api.RetrofitBuilder
-import com.example.projectdemos.data.model.User
+import com.example.projectdemos.data.model.Result
 import com.example.projectdemos.ui.base.ViewModelFactory
 import com.example.projectdemos.ui.main.adapter.MainAdapter
 import com.example.projectdemos.ui.main.viewmodel.MainViewModel
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                     Status.SUCCESS -> {
                         recyclerView.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
-                        resource.data?.let { users -> retrieveList(users) }
+                        resource.data?.let { users -> retrieveList(users.results) }
                     }
                     ERROR -> {
                         recyclerView.visibility = View.VISIBLE
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun retrieveList(users: List<User>) {
+    private fun retrieveList(users: List<Result>) {
         adapter.apply {
             addUsers(users)
             notifyDataSetChanged()
